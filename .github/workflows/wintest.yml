@@ -9,9 +9,9 @@ jobs:
 
     steps:
     - name: Enable Microsoft-Hyper-V
-      run: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+      run: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
     - name: Enable HypervisorPlatform
-      run: Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
+      run: Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All -NoRestart
     - name: Reboot
       run: Restart-Computer
     - name: Download
