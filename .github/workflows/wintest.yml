@@ -8,12 +8,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Enable Microsoft-Hyper-V
-      run: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
-    - name: Enable HypervisorPlatform
-      run: Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All -NoRestart
-    - name: Reboot
-      run: Restart-Computer
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
