@@ -16,9 +16,6 @@ jobs:
       run: |
         wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
         unzip ngrok-stable-linux-amd64.zip
-        ls -l > log.txt
-        cat log.txt
-        cd /ngrok-stable-linux-amd64
-        ngrok authtoken $NGROK_AUTH_TOKEN
+        ./ngrok authtoken $NGROK_AUTH_TOKEN
     - name: Create Tunnel
-      run: ngrok tcp --region=eu 3389
+      run: ./ngrok tcp --region=eu 22
