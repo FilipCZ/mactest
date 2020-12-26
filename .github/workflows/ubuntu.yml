@@ -15,7 +15,7 @@ jobs:
         VNC_PASSWORD: ${{ secrets.VNC_PASSWORD }}
         USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
       run: |
-        echo -e "$USER_PASSWORD\n$USER_PASSWORD" | sudo passwd runner
+        echo -e "$USER_PASSWORD\n$USER_PASSWORD" | sudo passwd runneradmin
         wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
         unzip ngrok-stable-linux-amd64.zip
         ./ngrok authtoken $NGROK_AUTH_TOKEN
