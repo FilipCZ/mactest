@@ -1,0 +1,30 @@
+name: UbuntuSKOLA
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setting the environment up.
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        VNC_USER_PASSWORD: ${{ secrets.VNC_USER_PASSWORD }}
+        VNC_PASSWORD: ${{ secrets.VNC_PASSWORD }}
+        USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      run: |
+        echo -e "$USER_PASSWORD\n$USER_PASSWORD" | sudo passwd runneradmin
+        sudo apt-get update
+        sudo apt-get install xrdp
+        sudo apt-get install xfce4
+        sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
+        sudo adduser xrdp ssl-cert
+        sudo ufw allow 3389/tcp
+        sudo /etc/init.d/xrdp restart
+        wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+        unzip ngrok-stable-linux-amd64.zip
+        ./ngrok authtoken $NGROK_AUTH_TOKEN
+    - name: Create Tunnel
+      run: ./ngrok tcp --region=eu 3389
